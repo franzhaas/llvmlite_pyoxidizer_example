@@ -1,0 +1,63 @@
+# This is a basic workflow that is manually triggered
+
+name: Manual workflow
+
+# Controls when the action will run. Workflow runs when manually triggered using the UI
+# or API.
+on:
+  workflow_dispatch:
+    # Inputs the workflow accepts.
+    inputs:
+      name:
+        # Friendly description to be shown in the UI instead of 'name'
+        description: 'Person to greet'
+        # Default value if no value is explicitly provided
+        default: 'World'
+        # Input has to be provided for the workflow to run
+        required: true
+
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+jobs:
+  # This workflow contains a single job called "greet"
+  greet:
+    # The type of runner that the job will run on
+    runs-on: windows-latest
+
+    # Steps represent a sequence of tasks that will be executed as part of the job
+    steps:
+    # Runs a single command using the runners shell
+    - name: Setup Python
+  uses: actions/setup-python@v2.3.1
+  with:
+    # Version range or exact version of a Python version to use, using SemVer's version range syntax.
+    python-version: 3.9
+    # Used to specify a package manager for caching in the default directory. Supported values: pip, pipenv.
+    cache: # optional
+    # The target architecture (x86, x64) of the Python interpreter.
+    architecture: x64
+    # Used to pull python distributions from actions/python-versions. Since there's a default, this is typically not supplied by the user.
+    token: # optional, default is ${{ github.token }}
+    # Used to specify the path to dependency files. Supports wildcards or a list of file names for caching multiple dependencies.
+    cache-dependency-path: # optional
+    - name: createEXE
+      run: pip install pyoxidizer;cd withimportlib; pyoxidizer build exe
+    - name: Action Archiver
+  # You may pin to the exact commit or the version.
+  # uses: sibiraj-s/action-archiver@2d663266fe4deaecb67eb9a607f9206fa7a209b0
+  uses: sibiraj-s/action-archiver@v1.0.0
+  with:
+    # Current working directory for the action
+    working-directory: # optional, default is 
+    # The archive format to use. Either zip or tar
+    format: # default is tar
+    # A File or directory or glob pattern to archive
+    path: *.exe # default is *
+    # Name of the output file
+    output: # default is __archive__
+    # Compress the tar archive using gzip
+    gzip: # optional
+    # Compression level for the archive
+    compression-level: # optional, default is 4
+    # Paths to ignore. Can be used when path is a directory or glob
+    ignore: # optional, default is 
+    
