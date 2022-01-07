@@ -31,7 +31,7 @@ def make_exe():
 
     exe.windows_subsystem = "console"
 
-    exe.add_python_resources(exe.pip_install(["..\llvmlite-0.37.0-cp39-cp39-win_amd64.whl", "setuptools"]))
+    exe.add_python_resources(exe.pip_install(["git+https://github.com/franzhaas/llvmlite.git#egg=llvmlite"]))
 
     return exe
 
@@ -55,34 +55,7 @@ def make_msi(exe):
 
 # Dynamically enable automatic code signing.
 def register_code_signers():
-    # You will need to run with `pyoxidizer build --var ENABLE_CODE_SIGNING 1` for
-    # this if block to be evaluated.
-    if not VARS.get("ENABLE_CODE_SIGNING"):
-        return
-
-    # Use a code signing certificate in a .pfx/.p12 file, prompting the
-    # user for its path and password to open.
-    # pfx_path = prompt_input("path to code signing certificate file")
-    # pfx_password = prompt_password(
-    #     "password for code signing certificate file",
-    #     confirm = True
-    # )
-    # signer = code_signer_from_pfx_file(pfx_path, pfx_password)
-
-    # Use a code signing certificate in the Windows certificate store, specified
-    # by its SHA-1 thumbprint. (This allows you to use YubiKeys and other
-    # hardware tokens if they speak to the Windows certificate APIs.)
-    # sha1_thumbprint = prompt_input(
-    #     "SHA-1 thumbprint of code signing certificate in Windows store"
-    # )
-    # signer = code_signer_from_windows_store_sha1_thumbprint(sha1_thumbprint)
-
-    # Choose a code signing certificate automatically from the Windows
-    # certificate store.
-    # signer = code_signer_from_windows_store_auto()
-
-    # Activate your signer so it gets called automatically.
-    # signer.activate()
+    return
 
 
 # Call our function to set up automatic code signers.
