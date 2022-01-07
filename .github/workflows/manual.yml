@@ -51,7 +51,7 @@ jobs:
     # The archive format to use. Either zip or tar
     format: # default is tar
     # A File or directory or glob pattern to archive
-    path: *.exe # default is *
+    path: "*.exe" # default is *
     # Name of the output file
     output: # default is __archive__
     # Compress the tar archive using gzip
