@@ -31,7 +31,7 @@ def make_exe():
 
     exe.windows_subsystem = "console"
 
-    exe.add_python_resources(exe.pip_install(["C:\\local_git_repos\\llvmlite_pyoxidizer_example\\llvmlite-0.37.0-cp39-cp39-win_amd64.whl", "setuptools"]))
+    exe.add_python_resources(exe.pip_install(["..\llvmlite-0.37.0-cp39-cp39-win_amd64.whl", "setuptools"]))
 
     return exe
 
